@@ -149,10 +149,6 @@ const RPSGame = {
 };
 
 function createHistory(match, human, computer, history) {
-  // console.log(`match is ${match} and history is ${Array.isArray(history)}`);
-  // return {
-  //   record: history.concat([`Match${match}: Your choice - ${human}, Computer's choice - ${computer}`]),
-  // };
   return history.concat([`Match${match}: Your choice - ${human}, Computer's choice - ${computer}`]);
 }
 
