@@ -13,3 +13,5 @@ let foo = {
 foo.deliverMessage = deliverMessage;
 
 foo.deliverMessage();
+
+//  It will output the string 'Hello from the global scope!'.
