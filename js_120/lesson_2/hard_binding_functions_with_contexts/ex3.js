@@ -9,5 +9,5 @@ function foo() {
 
 let bar = foo.bind(obj);
 
-console.log(foo());
-console.log(bar());
+console.log(foo());       //  NaN
+console.log(bar());       //  5
