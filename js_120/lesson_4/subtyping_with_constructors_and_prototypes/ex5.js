@@ -20,7 +20,5 @@ Goodbye.prototype.bye = function() {
   this.greet("Goodbye");
 };
 
-let hello = new Hello();
-hello.greet();
-
-//  undefined
+Hello.hi();
+// TypeError

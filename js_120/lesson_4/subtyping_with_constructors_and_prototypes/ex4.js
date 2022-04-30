@@ -21,6 +21,6 @@ Goodbye.prototype.bye = function() {
 };
 
 let hello = new Hello();
-hello.greet();
+hello.greet('Goodbye');
 
-//  undefined
+//  Goodbye
