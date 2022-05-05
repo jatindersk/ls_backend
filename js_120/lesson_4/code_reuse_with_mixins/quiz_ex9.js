@@ -27,7 +27,6 @@ console.log(Object.getPrototypeOf(child).constructor === Child);   // true
 console.log(child.school === "PS 33");                             // true
 console.log(child.learn() === "I'm going to school!");             // true
 console.log(child.speak() === "Hello, my name is Suzy.");          // true
-console.log();
 
 let person = new Person("Pete");
 console.log(person instanceof Child === false);                    // true
