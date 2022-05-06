@@ -8,6 +8,17 @@ function createInvoice(services = {}) {
   };
 }
 
+function createPayment(payment = {}) {
+  return {
+    phone: payment.phone || 0,
+    internet: payment.internet || 0,
+    amount: payment.amount || 0,
+    total() {
+      return this.amount || this.phone + this.internet;
+    },
+  };
+}
+
 function paymentTotal(payments) {
   return payments.reduce((sum, payment)  => sum + payment.total(), 0);
 }
