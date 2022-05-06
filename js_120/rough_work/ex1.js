@@ -1,4 +1,4 @@
-//  Context loss
+//  Context Loss
 //  1. Method Copying
 
 // function repeatSelf(func) {
