@@ -1,6 +1,7 @@
 //  rules:
 //  - use an array to mimic the buffer / queue
 //  - how to keep track of the oldest object?
+//  -
 
 class CircularQueue {
   constructor(size) {
