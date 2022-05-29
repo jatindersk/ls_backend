@@ -26,3 +26,7 @@ truck.goFast();
 
 console.log('goFast' in car);
 console.log('goFast' in truck);
+
+//  The instance's prototype object has a constructor property.
+//  This constructor property has a name attribute which returns
+//  the name of the class /constructor function as a string.
