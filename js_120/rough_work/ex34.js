@@ -21,8 +21,8 @@ Goodbye.prototype.bye = function() {
 };
 
 let hello = new Hello();
-hello.hi();     //  'Hello'
-// hello.bye();    //  TypeError
-hello.greet();  //  undefined
+hello.hi();               //  'Hello'
+// hello.bye();           //  TypeError
+hello.greet();            //  undefined
 hello.greet('Goodbye');   //  Goodbye
-Hello.hi();   //  TypeError
+Hello.hi();               //  TypeError
