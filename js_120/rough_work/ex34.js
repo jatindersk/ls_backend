@@ -22,7 +22,7 @@ Goodbye.prototype.bye = function() {
 
 let hello = new Hello();
 hello.hi();               //  'Hello'
-// hello.bye();           //  TypeError
 hello.greet();            //  undefined
 hello.greet('Goodbye');   //  Goodbye
+hello.bye();           //  TypeError
 Hello.hi();               //  TypeError
