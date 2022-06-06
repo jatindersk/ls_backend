@@ -10,8 +10,5 @@ class Cat {
 let fakeCat = Object.create(Cat.prototype); // your implementation
 console.log(fakeCat);
 console.log(fakeCat instanceof Cat); // logs true
-console.log(fakeCat.name);           // logs undefined
+console.log(fakeCat.__proto__.constructor.name);           // logs undefined
 console.log(fakeCat.speaks());       // logs undefined says meowwww.
-
-let fakeCat1 = new Cat(); // your implementation
-console.log(fakeCat1);
