@@ -8,6 +8,7 @@ class Cat {
 }
 
 let fakeCat = Object.create(Cat.prototype); // your implementation
+
 console.log(fakeCat);
 console.log(fakeCat instanceof Cat); // logs true
 console.log(fakeCat.__proto__.constructor.name);           // logs undefined
