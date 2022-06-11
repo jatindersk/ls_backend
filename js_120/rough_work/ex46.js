@@ -28,7 +28,6 @@ banner1.displayBanner();
 // |                                            |
 // +--------------------------------------------+
 
-
 let banner2 = new Banner('');
 banner2.displayBanner();
 // +--+
