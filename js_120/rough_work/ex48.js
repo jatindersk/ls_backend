@@ -39,23 +39,23 @@ function createComputer() {
   return Object.assign(computerObject, playerObject);
 }
 
-function createPlayer(playerType) {
+function createPlayer() {
   return {
     move: null,
   };
 }
 
-function createMove() {
-  return {};
-}
+// function createMove() {
+//   return {};
+// }
 
-function createRule() {
-  return {};
-}
+// function createRule() {
+//   return {};
+// }
 
-let compare = function (move1, move2) {
+// let compare = function (move1, move2) {
 
-};
+// };
 
 const RPSGame = {
   human: createHuman(),
