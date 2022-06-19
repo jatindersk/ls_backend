@@ -1,6 +1,7 @@
 let obj = {
   a: 'Amazebulous!',
 };
+
 let otherObj = {
   a: "That's not a real word!",
 };
@@ -12,3 +13,4 @@ function foo() {
 let bar = foo.bind(obj);
 
 bar.call(otherObj);
+//  Amazebulous!
