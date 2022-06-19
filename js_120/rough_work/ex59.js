@@ -5,6 +5,7 @@ function deliverMessage() {
 }
 
 deliverMessage();
+//  'Hello from the global scope!'
 
 let foo = {
   message: 'Hello from the function scope!',
@@ -13,3 +14,4 @@ let foo = {
 foo.deliverMessage = deliverMessage;
 
 foo.deliverMessage();
+//  'Hello from the function scope!'
