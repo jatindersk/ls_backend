@@ -16,6 +16,14 @@ class Square {
   setMarker(marker) {
     this.marker = marker;
   }
+
+  isUnused() {
+    return this.marker === Square.UNUSED_SQUARE;
+  }
+
+  getMarker() {
+    return this.marker;
+  }
 }
 
 class Board {
@@ -24,6 +32,10 @@ class Board {
     for (let idx = 1; idx <= 9; idx += 1) {
       this.squares[idx] = new Square();
     }
+  }
+
+  isFull() {
+    return this.unusedSquares().length === 0;
   }
 
   display() {
@@ -45,26 +57,35 @@ class Board {
   markSquareAt(key, marker) {
     this.squares[key].setMarker(marker);
   }
-}
 
-class Row {
-  constructor() {
-    //STUB
-    // We need some way to identify a row of 3 squares
+  unusedSquares() {
+    return Object.keys(this.squares)
+      .filter(key => this.squares[key].isUnused());
   }
-}
 
-class Marker {
-  constructor() {
-    //STUB
-    // A marker is something that represents a player's "piece" on the board.
+  countMarkersFor(player, keys) {
+    let markers = keys.filter(key => {
+      return this.squares[key].toString() === player.getMarker();
+    });
+
+    return markers.length;
+  }
+
+  displayWithClear() {
+    console.clear();
+    console.log("");
+    console.log("");
+    this.display();
   }
 }
 
 class Player {
-  constructor() {
-    //STUB
-    // maybe a "marker" to keep track of this player's symbol (i.e., 'X' or 'O')
+  constructor(marker) {
+    this.marker = marker;
+  }
+
+  getMarker() {
+    return this.marker;
   }
 
   mark() {
@@ -72,23 +93,17 @@ class Player {
     // We need a way to mark the board with this player's marker.
     // How do we access the board?
   }
-
-  play() {
-    //STUB
-    // We need a way for each player to play the game.
-    // Do we need access to the board?
-  }
 }
 
 class Human extends Player {
   constructor() {
-    super();
+    super(Square.HUMAN_MARKER);
   }
 }
 
 class Computer extends Player {
   constructor() {
-    super();
+    super(Square.COMPUTER_MARKER);
   }
 }
 
@@ -104,42 +119,58 @@ class TTTGame {
     //SPIKE
     this.displayWelcomeMessage();
 
+    this.board.display();
     while (true) {
-      this.board.display();
 
       this.humanMoves();
       if (this.gameOver()) break;
 
       this.computerMoves();
       if (this.gameOver()) break;
-      break;
+
+      this.board.displayWithClear();
     }
 
+    this.board.displayWithClear();
     this.displayResults();
     this.displayGoodbyeMessage();
+  }
+
+  gameOver() {
+    return this.board.isFull() || this.someoneWon();
+  }
+
+  computerMoves() {
+    let choice;
+    let validChoices = this.board.unusedSquares();
+
+    do {
+      choice = Math.floor((Math.random() * 9) + 1).toString();
+    } while (!validChoices.includes(choice));
+
+    this.board.markSquareAt(choice, this.computer.getMarker());
   }
 
   humanMoves() {
     let choice;
 
     while (true) {
-      choice = readline.question('Choose a square between 1 and 9: ');
+      let validChoices = this.board.unusedSquares();
+      const prompt = `Choose a square amongst (${validChoices.join(', ')}): `;
+      choice = readline.question(prompt);
 
-      let integerValue = parseInt(choice, 10);
-      if (integerValue >= 1 && integerValue <= 9) break;
+      if (validChoices.includes(choice)) break;
 
       console.log("Sorry, that's not a valid choice.");
       console.log("");
     }
-    this.board.markSquareAt(choice, Square.HUMAN_MARKER);
-  }
-
-  computerMoves() {
-    console.log('computer moves');
+    this.board.markSquareAt(choice, this.human.getMarker());
   }
 
   displayWelcomeMessage() {
+    console.clear();
     console.log("Welcome to Tic Tac Toe!");
+    console.log("");
   }
 
   displayGoodbyeMessage() {
@@ -147,36 +178,36 @@ class TTTGame {
   }
 
   displayResults() {
-    //STUB
-    // show the results of this game (win, lose, tie)
+    if (this.isWinner(this.human)) {
+      console.log("You won! Congratulations!");
+    } else if (this.isWinner(this.computer)) {
+      console.log("I won! I won! Take that, human!");
+    } else {
+      console.log("A tie game. How boring.");
+    }
   }
 
-  firstPlayerMoves() {
-    //STUB
-    // the first player makes a move
+  someoneWon() {
+    return this.isWinner(this.human) || this.isWinner(this.computer);
   }
 
-  secondPlayerMoves() {
-    //STUB
-    // the second player makes a move
+  isWinner(player) {
+    return TTTGame.POSSIBLE_WINNING_ROWS.some(row => {
+      return this.board.countMarkersFor(player, row) === 3;
+    });
   }
 
-  gameOver() {
-    //STUB
-    return false;
-  }
+  static POSSIBLE_WINNING_ROWS = [
+    ["1", "2", "3"],            // top row of board
+    ["4", "5", "6"],            // center row of board
+    ["7", "8", "9"],            // bottom row of board
+    ["1", "4", "7"],            // left column of board
+    ["2", "5", "8"],            // middle column of board
+    ["3", "6", "9"],            // right column of board
+    ["1", "5", "9"],            // diagonal: top-left to bottom-right
+    ["3", "5", "7"],            // diagonal: bottom-left to top-right
+  ];
 }
 
 let game = new TTTGame();
 game.play();
-
-//  parseInt(numStr, radix)
-
-//  Over the years parseInt has seen several changes.
-//  to it's behaviour.
-//  Especially dependent to the radix argument and
-//  the numerics string argument.
-//  It's behaviour is implementation dependent and
-//  changes with change in the engine.
-//  To avoid problems rising out of inconsistency in
-//  behaviour, always use the radix argument.
