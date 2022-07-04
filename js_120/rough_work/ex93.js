@@ -1,3 +1,5 @@
+let readline = require('readline-sync');
+
 class Square {
   static UNUSED_SQUARE = " ";
   static HUMAN_MARKER = "X";
@@ -9,6 +11,10 @@ class Square {
 
   toString() {
     return this.marker;
+  }
+
+  setMarker(marker) {
+    this.marker = marker;
   }
 }
 
@@ -34,6 +40,10 @@ class Board {
     console.log(`  ${this.squares["7"]}  |  ${this.squares["8"]}  |  ${this.squares["9"]}`);
     console.log("     |     |");
     console.log("");
+  }
+
+  markSquareAt(key, marker) {
+    this.squares[key].setMarker(marker);
   }
 }
 
@@ -72,13 +82,13 @@ class Player {
 
 class Human extends Player {
   constructor() {
-    //STUB
+    super();
   }
 }
 
 class Computer extends Player {
   constructor() {
-    //STUB
+    super();
   }
 }
 
@@ -86,6 +96,8 @@ class TTTGame {
   // omitted code
   constructor() {
     this.board = new Board();
+    this.human = new Human();
+    this.computer = new Computer();
   }
 
   play() {
@@ -95,16 +107,35 @@ class TTTGame {
     while (true) {
       this.board.display();
 
-      this.firstPlayerMoves();
+      this.humanMoves();
       if (this.gameOver()) break;
 
-      this.secondPlayerMoves();
+      this.computerMoves();
       if (this.gameOver()) break;
       break;
     }
 
     this.displayResults();
     this.displayGoodbyeMessage();
+  }
+
+  humanMoves() {
+    let choice;
+
+    while (true) {
+      choice = readline.question('Choose a square between 1 and 9: ');
+
+      let integerValue = parseInt(choice, 10);
+      if (integerValue >= 1 && integerValue <= 9) break;
+
+      console.log("Sorry, that's not a valid choice.");
+      console.log("");
+    }
+    this.board.markSquareAt(choice, Square.HUMAN_MARKER);
+  }
+
+  computerMoves() {
+    console.log('computer moves');
   }
 
   displayWelcomeMessage() {
@@ -138,3 +169,14 @@ class TTTGame {
 
 let game = new TTTGame();
 game.play();
+
+//  parseInt(numStr, radix)
+
+//  Over the years parseInt has seen several changes.
+//  to it's behaviour.
+//  Especially dependent to the radix argument and
+//  the numerics string argument.
+//  It's behaviour is implementation dependent and
+//  changes with change in the engine.
+//  To avoid problems rising out of inconsistency in
+//  behaviour, always use the radix argument.
