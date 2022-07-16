@@ -8,6 +8,11 @@ class Pet {
 class Owner {
   constructor(name) {
     this.name = name;
+    this.petCount = 0;
+  }
+
+  numberOfPets() {
+    return this.petCount;
   }
 }
 
@@ -29,20 +34,26 @@ class Shelter {
 
   adopt(owner, pet) {
     let obj = this.adoptions;
-    if (!obj[owner.name]) obj[owner.name] = [pet];
-    else obj[owner.name].push(pet);
-    //  console.log(obj);
+    if (!obj[owner.name]) {
+      obj[owner.name] = [pet];
+      owner.petCount += 1;
+    } else {
+      obj[owner.name].push(pet);
+      owner.petCount += 1;
+    }
   }
 
   printAdoptions() {
     let adoptionsList = Object.entries(this.adoptions);
-    //  console.log(adoptionsList);
+
     adoptionsList.forEach(arr => {
       console.log(`${arr[0]} has adopted the following pets:`);
 
       arr[1].forEach(pet => {
         console.log(`a ${pet.petType} named ${pet.petName}`);
       });
+
+      console.log();
     });
   }
 }
@@ -56,5 +67,5 @@ shelter.adopt(bholmes, sweetie);
 shelter.adopt(bholmes, molly);
 shelter.adopt(bholmes, chester);
 shelter.printAdoptions();
-// console.log(`${phanson.name} has ${phanson.numberOfPets()} adopted pets.`);
-// console.log(`${bholmes.name} has ${bholmes.numberOfPets()} adopted pets.`);
+console.log(`${phanson.name} has ${phanson.numberOfPets()} adopted pets.`);
+console.log(`${bholmes.name} has ${bholmes.numberOfPets()} adopted pets.`);
