@@ -4,6 +4,15 @@ class Vehicle {
   }
 }
 
+class Truck extends Vehicle {
+}
+
+class Car extends Vehicle {
+  constructor(year) {
+    super(year);
+  }
+}
+
 let truck = new Truck(2003);
 console.log(truck.year); // 2003
 
