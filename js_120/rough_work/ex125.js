@@ -1,34 +1,65 @@
-// // function Super(arg) {}
+// let Human = {
+//   getName() {
+//     return this.name;
+//   },
 
-// // Super.prototype.baz = function(char) {
-// //   console.log(`This is Super baz${char}`);
-// // };
+//   getAge() {
+//     return this.age;
+//   }
+// };
 
-// // function Sub(arg) {
-// //   Sub.superclass.call(this, arg);
-// // }
+// let Person = Object.create(Human);
+// Person.getInfo = function() {
+//   return `Hi! My name is ${this.getName()} and my age is ${this.getAge()}.`;
+// };
 
-// // Sub.superclass = Super.constructor;
-// // Sub.prototype = Object.create(Super.prototype);
-// // Sub.prototype.constructor = Sub;
+// let mark = Object.create(Person);
+// mark.name = 'Mark';
+// mark.age = 20;
 
-// // Sub.prototype.baz = function(char) {
-// //   Sub.superclass.foo.call(this, char);
-// // };
+// console.log(mark.getInfo());
 
-// // let arr1 = new Array(1, 2);
-// // console.log(arr1.constructor === Array);
+// function Human() {}
 
-// let str1 = new String('name');
-// let str2 = new str1.constructor('duplicate');
-// console.log(str2);
+// Human.prototype.getName = function() {
+//   return this.name;
+// };
 
-// console.log(str1.constructor === str2.constructor);
-// console.log(str2.constructor);
+// Human.prototype.getAge = function() {
+//   return this.age;
+// };
 
-function createFurniture() {}
+// function Person(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
 
-let chair = new createFurniture();
-console.log(Object.getOwnPropertyNames(chair));
+// Person.prototype = Object.create(Human.prototype);
+// Person.prototype.constructor = Person;
 
-console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(chair)));
+// Person.prototype.getInfo = function() {
+//   return `Hi! My name is ${this.getName()} and my age is ${this.getAge()}.`;
+// };
+
+// let mark = new Person('Mark', 20);
+// console.log(mark.getInfo());
+
+class Human {
+  getName() { return this.name };
+  getAge() { return this.age };
+}
+
+class Person extends Human {
+  constructor(name, age) {
+    super();
+    this.name = name;
+    this.age = age;
+  }
+
+  getInfo() {
+    return `Hi! My name is ${this.getName()} and my age is ${this.getAge()}.`;
+  }
+}
+
+let mark = new Person('Mark', 20);
+console.log(mark.getInfo());
