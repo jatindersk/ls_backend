@@ -19,3 +19,5 @@ let newObj = new test()
 console.log(newObj.constructor.name);
 console.log(test.constructor.name);
 console.log(test.name);
+
+console.log(Object.getPrototypeOf(Array.prototype) === Object.prototype);
