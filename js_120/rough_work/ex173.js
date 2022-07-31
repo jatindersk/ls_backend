@@ -1,12 +1,40 @@
-function Mammal() {}
+//  Nouns: Player, rule, move
+//  Verbs: compare, choose
 
-Mammal.prototype.breathe = function() {
-  console.log('breathe');
+//  Player: choose
+//  Rule:
+//  Move:
+
+function createPlayer() {
+  return {
+
+    choose() {}
+  }
 }
 
-function Cat() {}
-Cat.prototype = Object.create(Mammal.prototype);
-Cat.constructor = Cat;
+function createMove() {
+  return {
 
-let cat1 = new Cat();
-cat1.breathe();
+  }
+}
+
+function createRule() {
+  return {
+
+  }
+}
+
+let compare = function(move1, move2) {};
+
+const RPSGame = {
+  human: createPlayer(),
+  computer: createPlayer(),
+
+  play() {
+    displayWelcomeMessage();
+    this.human.choose();
+    this.computer.choose();
+    displayWinner();
+    displayGoodbyeMessage();
+  },
+};
